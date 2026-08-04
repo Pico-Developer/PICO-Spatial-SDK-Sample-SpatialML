@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2026 PICO. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+    <string name="app_name">SpatialML Demo: SuperResolution</string>
+    <string name="home_page_title">Choose a feature to show</string>
+    <string name="home_title">初识SpatialVideo</string>
+    <string name="home_desc">欢迎来到VideoComponent,VideoPlayerComponent的Demo展示</string>
+    <string name="option_one">VideoComponent</string>
+    <string name="option_two">VideoPlayerComponent</string>
+    <string name="VideoReflection">VideoReflection</string>
+    <string name="VideoCustom">VideoCustom</string>
+    <string name="DRM">DRM</string>
+    <string name="curved_tv">curved_tv</string>
+    <string name="Normal">Normal</string>
+    <string name="PortalEffect">PortalEffect</string>
+    <string name="StereoEffect">StereoEffect</string>
+    <string name="HardwareBuffer">HardwareBuffer</string>
+    <string name="CropEffect">CropEffect</string>
+    <string name="cylinder_3d_video">cylinder</string>
+    <string name="mv_hevc">mv_hevc</string>
+    <string name="Panel">Panel</string>
+    <string name="Sphere">Sphere</string>
+    <string name="description_theme">spatial video test demo</string>
+
+
+    <string name="ObjectAudio">ObjectAudio</string>
+    <string name="AmbientAudio">AmbientAudio</string>
+    <string name="ChannelAudio">ChannelAudio</string>
+    <string name="AudioMixGroups">AudioMixGroups</string>
+    <string name="Ambisonic">Ambisonic</string>
+    <string name="PcmPush">PcmPush</string>
+    <string name="PcmPull">PcmPull</string>
+
+</resources>
