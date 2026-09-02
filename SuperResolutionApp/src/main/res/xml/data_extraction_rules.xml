@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2025 - 2026 PICO. All rights reserved.
+
+     NOTICE: All information contained herein is, and remains the property of PICO.
+     The intellectual and technical concepts contained herein are proprietary to PICO.
+     and may be covered by patents, patents in process, and are protected by trade
+     secret or copyright law. Dissemination of this information or reproduction of
+     this material is strictly forbidden unless prior written permission is obtained
+     from PICO.
+-->
+<!--
+   Sample data extraction rules file; uncomment and customize as necessary.
+   See https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   for details.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- TODO: Use <include> and <exclude> to control what is backed up.
+        <include .../>
+        <exclude .../>
+        -->
+    </cloud-backup>
+    <!--
+    <device-transfer>
+        <include .../>
+        <exclude .../>
+    </device-transfer>
+    -->
+</data-extraction-rules>

@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+
+# Android Studio
+*.iml
+.idea/
+.cxx/
+captures/
+.externalNativeBuild/
+
+# Local config
+local.properties
+google-services.json
+
+# Keystore
+*.jks
+*.keystore
+
+# Build outputs
+*.apk
+*.hprof
+
+# Logs & OS files
+*.log
+.DS_Store
+
+# Spotless
+.spotless/

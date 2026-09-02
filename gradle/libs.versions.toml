@@ -1,0 +1,44 @@
+[versions]
+spatialBom = "6.1.9"
+agp = "8.9.1"
+kotlin = "2.0.21"
+core-ktx = "1.15.0"
+koin = "3.5.6"
+kotlinxSerializationJson = "1.7.3"
+androidx-lifecycle = "2.10.0"
+activity-compose = "1.10.1"
+navigation-compose = "2.8.5"
+# https://developer.android.com/jetpack/compose/bom/bom-mapping
+coroutines-android = "1.9.0"
+androidx-annotation = "1.9.1"
+spotless = "8.0.0"
+
+[libraries]
+spatial-bom = { module = "com.pico.spatial:bom", version.ref = "spatialBom" }
+spatial-core = { group = "com.pico.spatial.core", name = "core" }
+spatial-ml-securemr = { group = "com.pico.spatial.ml", name = "securemr" }
+spatial-ml-readback = { group = "com.pico.spatial.ml", name = "readback" }
+spatial-ui-platform = { group = "com.pico.spatial.ui", name = "platform" }
+spatial-ui-design = { group = "com.pico.spatial.ui", name = "design" }
+
+spatial-ui-foundation = { group = "com.pico.spatial.ui", name = "foundation" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "androidx-lifecycle" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines-android" }
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}

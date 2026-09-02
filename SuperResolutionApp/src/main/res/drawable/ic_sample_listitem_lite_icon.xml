@@ -1,0 +1,26 @@
+<!--
+  Copyright 2026 PICO. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+  <path
+      android:pathData="M12.76,3.064C13.799,2.804 14.885,2.667 16,2.667C17.116,2.667 18.202,2.804 19.24,3.064L18.594,5.651C17.765,5.444 16.896,5.334 16,5.334C15.104,5.334 14.236,5.444 13.407,5.651L12.76,3.064ZM4.563,9.144C5.69,7.267 7.267,5.69 9.144,4.563L10.517,6.849C9.014,7.752 7.752,9.014 6.849,10.517L4.563,9.144ZM22.857,4.563C24.734,5.69 26.31,7.267 27.438,9.144L25.152,10.517C24.249,9.014 22.986,7.752 21.484,6.849L22.857,4.563ZM2.667,16C2.667,14.885 2.804,13.799 3.064,12.76L5.651,13.407C5.444,14.236 5.334,15.104 5.334,16C5.334,16.896 5.444,17.765 5.651,18.594L3.064,19.24C2.804,18.202 2.667,17.116 2.667,16ZM28.937,12.76C29.196,13.799 29.334,14.885 29.334,16C29.334,17.116 29.196,18.202 28.937,19.24L26.35,18.594C26.557,17.765 26.667,16.896 26.667,16C26.667,15.104 26.557,14.236 26.35,13.407L28.937,12.76ZM9.144,27.438C7.267,26.31 5.69,24.734 4.563,22.857L6.849,21.484C7.752,22.986 9.014,24.249 10.517,25.152L9.144,27.438ZM27.438,22.857C26.31,24.734 24.734,26.31 22.857,27.438L21.484,25.152C22.986,24.249 24.249,22.986 25.152,21.484L27.438,22.857ZM16,29.334C14.885,29.334 13.799,29.196 12.76,28.937L13.407,26.35C14.236,26.557 15.104,26.667 16,26.667C16.896,26.667 17.765,26.557 18.594,26.35L19.24,28.937C18.202,29.196 17.116,29.334 16,29.334Z"
+      android:fillColor="#ffffff"
+      android:fillAlpha="1.0"
+      android:fillType="evenOdd"/>
+</vector>
