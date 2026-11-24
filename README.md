@@ -1,127 +1,88 @@
-# Spatial ML
+# PICO SpatialML Samples
 
 [English](README.md) | [简体中文](README_zh.md)
 
-A reference application built with the PICO Spatial SDK that demonstrates SpatialML capabilities for
-spatial applications on PICO OS 6. This SpatialML sample serves as a practical guide for developers,
-showcasing the functionalities for CV algorithm deployment, multi-modality spatial data as
-algorithm inputs, hardware acceleration for local machine learning inference, async readback of
-algorithm output data, permission handling, and the distinctive _SecureMR_ isolated sandbox
-environment which offers a comprehensive protection of user privacy while unleashing app's MR
-creativity.
+Nine independent Kotlin applications demonstrate SpatialML with the PICO Spatial SDK on PICO OS 6.
+They cover camera input, local model inference, hardware acceleration, asynchronous result readback,
+and rendering in protected spatial scenes. Some samples build graphs with Kotlin APIs; others load
+declarative pipeline packages. All use Spatial SDK **6.2.8**.
 
-![Screenshot](.github/screenshot.jpeg)
+## Samples
 
-## Features
+Start with [SpatialMLHelloApp](SpatialMLHelloApp/README.md) to check service connection and camera
+display, then choose a sample for the feature you want to explore.
 
-There is currently one sample app under this project: the SuperResolution App, which:
+| Application | What it demonstrates |
+| --- | --- |
+| [SpatialMLHelloApp](SpatialMLHelloApp/README.md) | Live camera display in a protected panel, without a model. |
+| [SuperResolutionApp](SuperResolutionApp/README.md) | Camera zoom with Real-ESRGAN, a Kotlin-built graph, protected display or camera readback, and optional visual question answering. |
+| [SuperResolutionPipelineApp](SuperResolutionPipelineApp/README.md) | The same Super Resolution experience using a pipeline package. |
+| [StylizedApp](StylizedApp) | Camera style prediction and transfer with a Kotlin-built graph. |
+| [StylizedPipelineApp](StylizedPipelineApp) | Camera style prediction and transfer using a pipeline package. |
+| [FaceMediaPipePipelineApp](FaceMediaPipePipelineApp) | MediaPipe face detection and detection-frame display using pipeline packages. |
+| [FaceLandmarkerApp](FaceLandmarkerApp/README.md) | 478 face landmarks, pose and optional expressions, with a face mesh and eight effects over passthrough in Full Space. |
+| [PosePipelineApp](PosePipelineApp) | Pose inference from a pipeline package, rendered as joints and limbs in a Stage. |
+| [MnistWildPipelineApp](MnistWildPipelineApp) | Handwritten digit recognition from camera crops, with crop, class and confidence displays. |
 
-- _Deploys_ a real-time neural-network-based SuperResolution model, to zoom in the see-through camera images,
-- _Provides_ two modes: the Relax and SecureMR modes: the former requires camera permission from users,
-  whereas the latter adopts the _SecureMR_ sandbox, providing zooming effect while protecting users
-  privacy,
-- _Implements_ a large-language-model-based visual-question-answer (VQA) interface in RelaxMR mode,
-  which allow users to launch a VQA query on the zoomed camera images, using your LLM backend of
-  your own choice, and
-- _Showcase_ how to use Kotlin co-routines to asynchronously invoke the SpatialML APIs.
+Each application has its own package, assets, APK and Android Studio run target. Model assets are
+included; the optional Super Resolution VQA feature has its own [backend setup](SuperResolutionApp/README.md#optional-visual-question-answering).
 
 ## Requirements
 
-To build and run this project, configure your development environment by following the official PICO Spatial SDK setup guide:
+- Android Studio, JDK 21 and Android SDK 35.
+- Git LFS to download model and artwork assets.
+- A physical PICO headset with compatible PICO OS 6 SpatialML services and USB debugging enabled.
+  Camera inference and headset alignment require device testing.
+
+Configure the development environment using the official guide:
 
 - [PICO Spatial SDK Setup Guide (Outside Chinese Mainland)](https://developer.picoxr.com/document/spatial-sdk/set-up-development-environment/)
 - [PICO Spatial SDK Setup Guide (Chinese Mainland)](https://developer-cn.picoxr.com/document/spatial-sdk/set-up-development-environment/)
 
-## Getting Started
+The repository pins SDK and toolchain versions in [gradle/libs.versions.toml](gradle/libs.versions.toml)
+and uses the included Gradle wrapper.
 
-### 1. Clone the Repository
+## Getting started
 
-```bash
-git clone <repository-url>
-cd SpatialML
-```
+1. Clone the repository and download its Git LFS assets:
 
-### 2. Open in Android Studio
+   ```bash
+   git clone https://github.com/Pico-Developer/PICO-Spatial-SDK-Sample-SpatialML.git
+   cd PICO-Spatial-SDK-Sample-SpatialML
+   git lfs pull
+   ```
 
-Launch Android Studio, select **Open an Existing Project**, and choose the `SpatialML` directory.
+2. Open the repository root in Android Studio and sync Gradle.
+3. Connect the headset, choose an application module from the run-target selector, and run it.
+   Follow that sample's guide for permissions and controls.
 
-### **[Optional]** Apply for ByteDance Volcano API Key
-
-As is mentioned above, the SuperResolution Demo App come with a LLM-based VQA interface, at [`SuperResolutionApp/src/main/java/com/pico/spatial/ml/sample/sr/vm/VQAWrapper.kt`](SuperResolutionApp/src/main/java/com/pico/spatial/ml/sample/sr/vm/VQAWrapper.kt). The built-in implementation to that interface uses the Volcano Cloud Engine as its backend. In
-order to use the VQA feature out-of-box, you may need to apply for a Volcano API key.
-
-Then, connect to the PICO device, ensure the USB debugging is enabled on that device, and run
-
-```bash
-adb shell setprop debug.spatialml.apikey <API-KEY>
-```
-
-If no API Key is provided, when you launch the app and enter _RelaxMR_ mode,
-you will find the "Ask AI" button not clickable.
-
-### **[Optional]** Replace the Volcano LLM backend with VQA APIs of your own choice
-
-Instead of applying for a Volcano API key, you can also replace the default implementation of the
-VQA interface with any VQA backend of your own choice. The only requirement is the VQA backend
-should provides RESTFul API calls.
-
-You can refer to the sample codes in [`SuperResolutionApp/src/main/java/com/pico/spatial/ml/sample/sr/vm/VQAWrapper.kt`](SuperResolutionApp/src/main/java/com/pico/spatial/ml/sample/sr/vm/VQAWrapper.kt), where the default implementation is defined:
-
-```kt
-val ark
-    get() = create<FileUploadResponse, QueryResponse>(
-        // ...
-    )
-```
-
-### 3. Run on Device
-
-PICO Emulator _DOES NOT_ support SpatialML features, so a PICO device with PICO OS 6 is required.
-
-1. Connect your PICO device to your development machine
-2. Enable **USB Debugging** on the device
-3. Click **Run 'app'** to deploy directly to your device
-4. You can filter the logcat logs using `Secure MR::Server` tag to capture the logs at run time. 
-
-## Project Structure
-
-SpatialML Sample follows a modular architecture to separate application logic from 3D resources:
+To build one sample from the repository root:
 
 ```bash
-SpatialML/
-├── SuperResolution/                            # Main application module
-│   └── src/main/
-│       ├── java/com/pico/spatial/ml/sample/sr/ # Kotlin source files
-│       │   ├── MainApplication.kt              # Application entry point
-│       │   ├── MainActivity.kt                 # Container definition and the root composable
-│       │   ├── view/                           # Composable views for UI
-│       │   ├── vm/                             # View model used by the composable view, which contains the
-│       │   │                                   # core algorithm implementation, for both Spatial ML API calls
-│       │   │                                   # and VQA invocations. 
-│       │   └── helper/                         # Helper utilities
-│       ├── assets/                             # Application assets for rendering
-│       ├── res/                                # Android resources
-│       └── AndroidManifest.xml                 # App manifest with Spatial components
-├── gradle/                               # Gradle dependencies and scripts
-├── build.gradle.kts                      # Root build configuration
-└── settings.gradle.kts                   # Project settings and SDK setup
+./gradlew :SpatialMLHelloApp:assembleDebug
 ```
 
-## Learning Resources
+Replace `SpatialMLHelloApp` with any application module from the table. Its debug APK is written to
+`<module>/build/outputs/apk/debug/`. Build all nine applications with `./gradlew assembleDebug`.
+Use the selected application's logcat tag and `Secure MR::Server` to inspect runtime failures.
 
-To deepen your understanding of spatial app development, explore the comprehensive resources on our official developer websites:
+## Shared modules and assets
+
+| Directory | Purpose |
+| --- | --- |
+| [face-landmarker](face-landmarker/README.md) | Face graph, models, result decoding, tracking and mesh helpers used by FaceLandmarkerApp. |
+| [perception](perception/README.md) | Capture-time transforms, Stage pose history and native graph resource ownership. |
+| [common](common) | Shared helpers for the camera and pipeline samples, including VQA integration. |
+| [shared-assets](shared-assets) | Models and artwork shared by the Super Resolution and Stylized sample pairs. |
+| [buildSrc](buildSrc) | Shared Android application and library build conventions. |
+
+## Resources and support
 
 - [PICO Developer Website (Outside Chinese Mainland)](https://developer.picoxr.com/)
 - [PICO Developer Website (Chinese Mainland)](https://developer-cn.picoxr.com/)
+- [PICO Developer Support Portal](https://picodevsupport.freshdesk.com/support/home)
 
 ## License
 
-© 2026 PICO. The project's source code is licensed under the [Apache 2.0 License](LICENSE.txt). All assets, including textures, 3D models, audio, and others, are licensed via [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-## Support
-
-For questions, issues, or feature requests, please contact us through the [PICO Developer Support Portal](https://picodevsupport.freshdesk.com/support/home) and submit a ticket.
-
----
-
-Developed as a reference for spatial application developers
+© 2026 PICO. Source code is licensed under the [Apache 2.0 License](LICENSE.txt).
+See the model and artwork licenses and notices included with each sample for asset terms.

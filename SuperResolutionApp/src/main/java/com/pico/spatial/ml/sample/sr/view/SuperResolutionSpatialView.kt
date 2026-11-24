@@ -33,7 +33,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +49,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pico.spatial.core.ecs.AttachmentPanelComponent
 import com.pico.spatial.core.ecs.CollisionComponent
@@ -83,7 +83,7 @@ import kotlinx.coroutines.withContext
 
 /**
  * The spatial-view to show 2D mixing 3D content in the super-resolution. This view will only be
- * brought up when the user confirms SecureMR v.s. RelaxMR mode. In RelaxMR mode, when the VQA
+ * brought up when the user confirms SpatialML v.s. RelaxMR mode. In RelaxMR mode, when the VQA
  * button is clicked, a subwindow will also be shown to demonstrate the VQA results.
  *
  * @param srViewModel the viewmodel which maintains the app's finite state machine. This view will
@@ -101,7 +101,7 @@ fun SuperResolutionSpatialView(srViewModel: SrViewModel = viewModel()) {
 
     val currentZoomFactor = remember { mutableStateOf("4x") }
 
-    val queryStatus by srViewModel.queryStatus.collectAsState()
+    val queryStatus by srViewModel.queryStatus.collectAsStateWithLifecycle()
 
     var hasCameraPermission by remember {
         mutableStateOf(
@@ -276,7 +276,7 @@ fun SuperResolutionSpatialView(srViewModel: SrViewModel = viewModel()) {
         ) { content, attachments ->
             if (srViewModel.appMode.value == SrViewModel.AppMode.RELAX_MR_CONFIRMED) {
                 content.addEntity(
-                    withContext(Dispatchers.IO) { Entity.load("asset://Display512.glb") }
+                    withContext(Dispatchers.IO) { Entity.load("asset://SpatialML/Display512.glb") }
                         .also { display ->
                             display.setName("display512")
                             display.components[TransformComponent::class.java]!!.apply {
@@ -286,7 +286,7 @@ fun SuperResolutionSpatialView(srViewModel: SrViewModel = viewModel()) {
                 )
             } else {
                 val controller =
-                    withContext(Dispatchers.IO) { Entity.load("asset://Controller.glb") }
+                    withContext(Dispatchers.IO) { Entity.load("asset://SpatialML/Controller.glb") }
                 controller.components[TransformComponent::class.java]!!.apply {
                     scaleBy(0.8f)
                     setPosition(Vector3(0f, 0f, -0.25f))

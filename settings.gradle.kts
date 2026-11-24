@@ -15,6 +15,7 @@ pluginManagement {
         }
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -27,6 +28,27 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SpatialML Sample"
+rootProject.name = "SpatialML Samples"
 
 include(":SuperResolutionApp")
+
+include(":SuperResolutionPipelineApp")
+
+include(":StylizedApp")
+
+include(":StylizedPipelineApp")
+
+include(":FaceMediaPipePipelineApp")
+
+include(":FaceLandmarkerApp")
+
+include(":PosePipelineApp")
+
+include(":MnistWildPipelineApp")
+
+include(":common")
+
+include(":perception")
+include(":face-landmarker")
+
+include(":SpatialMLHelloApp")

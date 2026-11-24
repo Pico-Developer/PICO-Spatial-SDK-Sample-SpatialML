@@ -37,14 +37,14 @@ class SrViewModel : ViewModel() {
     /** The app's running mode. */
     enum class AppMode {
         /**
-         * SecureMR mode is selected, but not confirmed. SecureMR mode means the app cannot get the
-         * outputs from SpatialML framework. SecureMR mode being selected means we need to pop up a
-         * window to asks the user to confirm their selection.
+         * SpatialML mode is selected, but not confirmed. SpatialML mode means the app cannot get
+         * the outputs from SpatialML framework. SpatialML mode being selected means we need to pop
+         * up a window to asks the user to confirm their selection.
          */
         SECURE_MR,
 
         /**
-         * SecureMR mode is selected and confirmed. The super-resolution algorithm can be started.
+         * SpatialML mode is selected and confirmed. The super-resolution algorithm can be started.
          */
         SECURE_MR_CONFIRMED,
 
@@ -106,7 +106,7 @@ class SrViewModel : ViewModel() {
 
     private val _appMode = MutableStateFlow(AppMode.NO_SELECTION)
 
-    /** The app mode, i.e., RelaxMR v.s. SecureMR. */
+    /** The app mode, i.e., RelaxMR v.s. SpatialML. */
     val appMode: StateFlow<AppMode> = _appMode
 
     private lateinit var superResolution: SrAlgorithmImpl

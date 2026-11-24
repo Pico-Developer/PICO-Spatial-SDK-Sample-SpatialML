@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MainApplication"
+        android:name=".platform.MainApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -37,7 +37,7 @@
             android:value="1" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".platform.MainActivity"
             android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
             android:exported="true">
             <intent-filter>
@@ -48,7 +48,7 @@
             <!-- WindowContainer's name -->
             <meta-data
                 android:name="pico.spatial.windowcontainer.id"
-                android:value="Home" />
+                android:value="SuperResolutionProgrammatic" />
             <!-- WindowContainer's resize type
             0: Automatic, a system default setting, set to ContentMinSize currently
             1: ContentMinSize, constrains that WindowContainer's size cannot be smaller than root view's minSize

@@ -1,0 +1,277 @@
+{
+  "tensors": {
+    "post_det": {
+      "dimensions": [
+        1,
+        21
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "is_placeholder": true,
+      "usage": 6,
+      "flag": 263
+    },
+    "vst_left_image": {
+      "dimensions": [
+        326,
+        580
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "is_placeholder": true,
+      "usage": 6,
+      "flag": 259
+    },
+    "vst_right_image": {
+      "dimensions": [
+        326,
+        580
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "is_placeholder": true,
+      "usage": 6,
+      "flag": 259
+    },
+    "vst_timestamp": {
+      "dimensions": [
+        1
+      ],
+      "channels": 4,
+      "data_type": 5,
+      "is_placeholder": true,
+      "usage": 5
+    },
+    "vst_camera_matrix": {
+      "dimensions": [
+        3,
+        3
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "is_placeholder": true,
+      "usage": 6,
+      "flag": 263
+    },
+    "frame_gltf": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 1,
+      "is_placeholder": true,
+      "usage": 7,
+      "is_gltf": true,
+      "asset": "gltf/frame.gltf"
+    },
+    "x1": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "y1": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "x2": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "y2": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "score": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "center_x": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "center_y": {
+      "dimensions": [
+        1,
+        1
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "image_point_mat": {
+      "dimensions": [
+        1,
+        2
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "flag": 263,
+      "is_placeholder": false
+    },
+    "image_point": {
+      "dimensions": [
+        1
+      ],
+      "channels": 2,
+      "data_type": 5,
+      "is_placeholder": false,
+      "usage": 1
+    },
+    "point_xyz_array": {
+      "dimensions": [
+        1
+      ],
+      "channels": 3,
+      "data_type": 6,
+      "is_placeholder": false,
+      "usage": 1
+    },
+    "frame_pose": {
+      "dimensions": [
+        4,
+        4
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "is_placeholder": true,
+      "usage": 6,
+      "flag": 263
+    }
+  },
+  "operators": [
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_JAVASCRIPT_PICO",
+      "inputs": [
+        {
+          "name": "det",
+          "tensor": "post_det"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "uv",
+          "tensor": "image_point_mat"
+        }
+      ],
+      "attrs": [
+        "var det;\nvar uv;\nvar score = det[4];\nvar valid = score >= 0.25 && det[2] > det[0] && det[3] > det[1];\nuv[0] = valid ? Math.round((det[0] + det[2]) * 0.5) : 0;\nuv[1] = valid ? Math.round((det[1] + det[3]) * 0.5) : 0;\n"
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ASSIGNMENT_PICO",
+      "inputs": [
+        {
+          "tensor": "image_point_mat"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "image_point"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_UV_TO_3D_IN_CAM_SPACE_PICO",
+      "inputs": [
+        {
+          "tensor": "image_point"
+        },
+        {
+          "tensor": "vst_timestamp"
+        },
+        {
+          "tensor": "vst_camera_matrix"
+        },
+        {
+          "tensor": "vst_left_image"
+        },
+        {
+          "tensor": "vst_right_image"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "point_xyz_array"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_JAVASCRIPT_PICO",
+      "inputs": [
+        {
+          "name": "det",
+          "tensor": "post_det"
+        },
+        {
+          "name": "point",
+          "tensor": "point_xyz_array"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "anchor",
+          "tensor": "frame_pose"
+        }
+      ],
+      "attrs": [
+        "var det;\nvar point;\nvar anchor;\nvar score = det[4];\nvar valid = score >= 0.25 && det[2] > det[0] && det[3] > det[1];\nvar px = valid ? point[0] : 0.0;\nvar py = valid ? -point[1] : 0.0;\nvar pz = valid ? point[2] + 0.02 : -6.0;\nvar h = valid ? Math.max(det[3] - det[1], 1.0) : 0.0;\nvar s = valid ? Math.max(h / 1200.0, 0.02) : 0.0001;\nvar zScale = valid ? 0.001 : 0.0001;\nanchor[0] = s;\nanchor[1] = 0.0;\nanchor[2] = 0.0;\nanchor[3] = px;\nanchor[4] = 0.0;\nanchor[5] = s;\nanchor[6] = 0.0;\nanchor[7] = py;\nanchor[8] = 0.0;\nanchor[9] = 0.0;\nanchor[10] = zScale;\nanchor[11] = pz;\nanchor[12] = 0.0;\nanchor[13] = 0.0;\nanchor[14] = 0.0;\nanchor[15] = 1.0;\n"
+      ]
+    }
+  ],
+  "inputs": [
+    "post_det",
+    "vst_left_image",
+    "vst_right_image",
+    "vst_timestamp",
+    "vst_camera_matrix"
+  ],
+  "outputs": [
+    "frame_pose",
+    "frame_gltf"
+  ]
+}

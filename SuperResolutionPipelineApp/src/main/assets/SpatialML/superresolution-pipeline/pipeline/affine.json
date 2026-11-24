@@ -1,0 +1,66 @@
+{
+  "tensors": {
+    "zoom_points": {
+      "dimensions": [
+        3,
+        1
+      ],
+      "channels": 2,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": true
+    },
+    "target_points": {
+      "dimensions": [
+        3,
+        1
+      ],
+      "channels": 2,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": false,
+      "data": [
+        0,
+        0,
+        127,
+        0,
+        0,
+        127
+      ]
+    },
+    "zoom_affine": {
+      "dimensions": [
+        2,
+        3
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": true
+    }
+  },
+  "operators": [
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_GET_AFFINE_PICO",
+      "inputs": [
+        {
+          "tensor": "zoom_points"
+        },
+        {
+          "tensor": "target_points"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "zoom_affine"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    "zoom_points"
+  ],
+  "outputs": [
+    "zoom_affine"
+  ]
+}

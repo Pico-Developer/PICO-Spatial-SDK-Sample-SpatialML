@@ -1,0 +1,38 @@
+{
+  "sourceProject": "SecureMR-Unity-Sample-Private-worktrees/dev-pipeline_zoo",
+  "sourceRevision": "57e3a47705688bed5529092a07bfc4c1dceed3e3",
+  "models": {
+    "face_detector.tflite": {
+      "sourcePath": "Assets/MLModels/face_detector.tflite.bytes",
+      "sha256": "328ce1601afbed980a70a30e0fb8eb3982469f05e0191977cdd59917c5e109bd"
+    },
+    "face_landmark_estimation.tflite": {
+      "sourcePath": "Assets/FaceLandmarker/Models/face_landmarks_detector.tflite.bytes",
+      "sha256": "1daa04f631a8592b92cca082240645b8c1cb0b0c1ff7ee9b031fa4fb8842dbc2"
+    },
+    "face_blendshapes.tflite": {
+      "sourcePath": "Assets/FaceLandmarker/Models/face_blendshapes.tflite.bytes",
+      "sha256": "4f36dded049db18d76048567439b2a7f58f1daabc00d78bfe8f3ad396a2d2082"
+    }
+  },
+  "upstreamBundle": {
+    "source": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+    "bundleSha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+    "originalFiles": {
+      "face_detector.tflite.bytes": "b4578f35940bf5a1a655214a1cce5cab13eba73c1297cd78e1a04c2380b0152f",
+      "face_landmarks_detector.tflite.bytes": "c7d54204ce0448474c7f3fa9af494787c0965cbdd6f20fc72867e43046bd43d5",
+      "face_blendshapes.tflite.bytes": "4f36dded049db18d76048567439b2a7f58f1daabc00d78bfe8f3ad396a2d2082"
+    },
+    "files": {
+      "face_detector.tflite.bytes": "b4578f35940bf5a1a655214a1cce5cab13eba73c1297cd78e1a04c2380b0152f",
+      "face_landmarks_detector.tflite.bytes": "1daa04f631a8592b92cca082240645b8c1cb0b0c1ff7ee9b031fa4fb8842dbc2",
+      "face_blendshapes.tflite.bytes": "4f36dded049db18d76048567439b2a7f58f1daabc00d78bfe8f3ad396a2d2082"
+    },
+    "transformations": {
+      "face_landmarks_detector.tflite.bytes": {
+        "normalizedShapeSignatureDimensions": 221,
+        "reason": "SecureMR LiteRT requires fixed tensor shape signatures"
+      }
+    }
+  }
+}

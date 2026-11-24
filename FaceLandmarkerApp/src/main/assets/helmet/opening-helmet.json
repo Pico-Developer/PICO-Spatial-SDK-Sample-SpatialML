@@ -1,0 +1,47 @@
+{
+  "asset": "opening-helmet.glb",
+  "units": "meters",
+  "up": "+Y",
+  "front": "+Z",
+  "origin": "canonical face pose origin",
+  "neckGeometry": false,
+  "designScaleMultiplier": 1.25,
+  "previousDimensionsMeters": [
+    0.17453006,
+    0.22072877,
+    0.13843139
+  ],
+  "backCoverage": "full head shell",
+  "faceplateBacking": "FaceplateBacking",
+  "blenderVersion": "4.5.9 LTS",
+  "hinge": {
+    "node": "FaceplateHinge",
+    "parent": "OpeningHelmet",
+    "position": [
+      0.0,
+      0.10749999999999998,
+      0.043750000000000004
+    ],
+    "closedRotation": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "openDegrees": -110
+  },
+  "bounds": {
+    "min": [
+      -0.10874399542808533,
+      -0.125,
+      -0.17249999940395355
+    ],
+    "max": [
+      0.10979141294956207,
+      0.1550000011920929,
+      0.12383483350276947
+    ]
+  },
+  "rearShell": "HeadShell",
+  "sha256": "af5351bbdfca26c738755d6b333248cdf0f4300628e5bf435236e69c8a6f1f0f"
+}

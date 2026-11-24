@@ -1,0 +1,23 @@
+{
+  "schema_version": "2",
+  "id": "stylization-pipeline",
+  "pipelines": [
+    {
+      "id": "style_predict",
+      "path": "pipeline/style_predict.json"
+    },
+    {
+      "id": "affine",
+      "path": "pipeline/affine.json"
+    },
+    {
+      "id": "style_transfer",
+      "path": "pipeline/style_transfer.json"
+    }
+  ],
+  "runtime": {
+    "supported_modes": [
+      "spatial"
+    ]
+  }
+}

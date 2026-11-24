@@ -1,0 +1,20 @@
+Opening helmet (opening-helmet.glb) — original sample artwork
+
+Copyright 2026 PICO. Artwork is licensed under Creative Commons Attribution 4.0
+International, consistent with this repository's asset policy:
+https://creativecommons.org/licenses/by/4.0/
+
+Authored in Blender 4.5.9 LTS for this sample and distributed as a ready-to-load
+GLB. The model has a crimson metallic crown and temple shell, a hinged gold
+faceplate with backing and rim walls, a complete rear and side head shell,
+compact hinge hardware and cool-white eye slits. Its 25% enlargement is baked
+into the geometry and hinge. It has no neck,
+collar or shoulder geometry. No downloaded model or texture is incorporated.
+
+The facial aperture and faceplate backing use the sample's MediaPipe canonical
+face reference. MediaPipe provenance and Apache-2.0 attribution are
+retained in face-landmarker/pipeline/SpatialML/face-landmarker/MEDIAPIPE-LICENSE.txt
+and provenance.json. opening-helmet.json records axes, rig, bounds and checksum.
+
+The separately packaged damaged-helmet.glb retains its existing attribution in
+DAMAGED_HELMET_LICENSE.md.

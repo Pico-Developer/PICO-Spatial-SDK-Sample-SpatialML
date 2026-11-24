@@ -1,0 +1,264 @@
+{
+  "tensors": {
+    "vst_right": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "vst_left": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "vst_timestamp": {
+      "dimensions": [
+        1
+      ],
+      "channels": 4,
+      "data_type": 5,
+      "usage": 5,
+      "is_placeholder": false
+    },
+    "vst_camera_matrix": {
+      "dimensions": [
+        3,
+        3
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "zoom_affine": {
+      "dimensions": [
+        2,
+        3
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": true
+    },
+    "affined_u8": {
+      "dimensions": [
+        128,
+        128
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "affined_float": {
+      "dimensions": [
+        128,
+        128
+      ],
+      "channels": 3,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "zoomed_float": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "channels": 3,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "zoomed_u8": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "zoomed_image": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "channels": 4,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": true
+    }
+  },
+  "operators": [
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_RECTIFIED_VST_ACCESS_PICO",
+      "inputs": [],
+      "outputs": [
+        {
+          "tensor": "vst_right"
+        },
+        {
+          "tensor": "vst_left"
+        },
+        {
+          "tensor": "vst_timestamp"
+        },
+        {
+          "tensor": "vst_camera_matrix"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_APPLY_AFFINE_PICO",
+      "inputs": [
+        {
+          "tensor": "zoom_affine"
+        },
+        {
+          "tensor": "vst_right"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "affined_u8"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ASSIGNMENT_PICO",
+      "inputs": [
+        {
+          "tensor": "affined_u8"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "affined_float"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ARITHMETIC_COMPOSE_PICO",
+      "inputs": [
+        {
+          "tensor": "affined_float"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "affined_float"
+        }
+      ],
+      "attrs": [
+        "({0} / 255.0)"
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_RUN_MODEL_INFERENCE_PICO",
+      "inputs": [
+        {
+          "name": "image",
+          "tensor": "affined_float"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "upscaled_image",
+          "tensor": "zoomed_float"
+        }
+      ],
+      "model": {
+        "bin_path": "model/real_esrgan_x4v3.tflite",
+        "model_name": "real_esrgan_x4v3",
+        "model_type": "tflite",
+        "model_target": "npu",
+        "input": [
+          {
+            "name": "image",
+            "shape": [
+              1,
+              128,
+              128,
+              3
+            ],
+            "encoding_type": "FP32"
+          }
+        ],
+        "output": [
+          {
+            "name": "upscaled_image",
+            "shape": [
+              1,
+              512,
+              512,
+              3
+            ],
+            "encoding_type": "FP32"
+          }
+        ]
+      }
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ARITHMETIC_COMPOSE_PICO",
+      "inputs": [
+        {
+          "tensor": "zoomed_float"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "zoomed_float"
+        }
+      ],
+      "attrs": [
+        "({0} * 255.0)"
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ASSIGNMENT_PICO",
+      "inputs": [
+        {
+          "tensor": "zoomed_float"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "zoomed_u8"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_CONVERT_COLOR_PICO",
+      "inputs": [
+        {
+          "tensor": "zoomed_u8"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "zoomed_image"
+        }
+      ],
+      "attrs": [
+        "0"
+      ]
+    }
+  ],
+  "inputs": [
+    "zoom_affine"
+  ],
+  "outputs": [
+    "zoomed_image"
+  ]
+}

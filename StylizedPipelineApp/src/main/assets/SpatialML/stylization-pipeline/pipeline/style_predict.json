@@ -1,0 +1,142 @@
+{
+  "tensors": {
+    "reference_style": {
+      "dimensions": [
+        256,
+        256
+      ],
+      "channels": 4,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": true
+    },
+    "style_rgb": {
+      "dimensions": [
+        256,
+        256
+      ],
+      "channels": 3,
+      "data_type": 1,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "style_f32": {
+      "dimensions": [
+        256,
+        256
+      ],
+      "channels": 3,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": false
+    },
+    "predicted_style": {
+      "dimensions": [
+        1,
+        100
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "is_placeholder": true,
+      "usage": 6
+    }
+  },
+  "operators": [
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_CONVERT_COLOR_PICO",
+      "attrs": [
+        "1"
+      ],
+      "inputs": [
+        {
+          "tensor": "reference_style"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "style_rgb"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ASSIGNMENT_PICO",
+      "inputs": [
+        {
+          "tensor": "style_rgb"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "style_f32"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_ARITHMETIC_COMPOSE_PICO",
+      "inputs": [
+        {
+          "tensor": "style_f32"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "style_f32"
+        }
+      ],
+      "attrs": [
+        "({0} / 255.0)"
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_RUN_MODEL_INFERENCE_PICO",
+      "inputs": [
+        {
+          "name": "style_image",
+          "tensor": "style_f32"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mobilenet_conv/Conv/BiasAdd",
+          "tensor": "predicted_style"
+        }
+      ],
+      "model": {
+        "bin_path": "model/stylepredict.tflite",
+        "model_name": "style_predictor",
+        "model_type": "tflite",
+        "model_target": "npu",
+        "input": [
+          {
+            "name": "style_image",
+            "shape": [
+              1,
+              256,
+              256,
+              3
+            ],
+            "encoding_type": "FP32"
+          }
+        ],
+        "output": [
+          {
+            "name": "mobilenet_conv/Conv/BiasAdd",
+            "shape": [
+              1,
+              1,
+              1,
+              100
+            ],
+            "encoding_type": "FP32"
+          }
+        ]
+      }
+    }
+  ],
+  "inputs": [
+    "reference_style"
+  ],
+  "outputs": [
+    "predicted_style"
+  ]
+}

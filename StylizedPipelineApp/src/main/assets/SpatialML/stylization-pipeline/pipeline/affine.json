@@ -1,0 +1,93 @@
+{
+  "tensors": {
+    "camera_clip_points": {
+      "dimensions": [
+        3,
+        1
+      ],
+      "channels": 2,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": true
+    },
+    "dst_points": {
+      "dimensions": [
+        3,
+        1
+      ],
+      "channels": 2,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": false,
+      "data": [
+        0,
+        0,
+        383,
+        0,
+        0,
+        383
+      ]
+    },
+    "affine_matrix": {
+      "dimensions": [
+        2,
+        3
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": true
+    },
+    "affine_reverse_matrix": {
+      "dimensions": [
+        2,
+        3
+      ],
+      "channels": 1,
+      "data_type": 6,
+      "usage": 6,
+      "is_placeholder": true
+    }
+  },
+  "operators": [
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_GET_AFFINE_PICO",
+      "inputs": [
+        {
+          "tensor": "camera_clip_points"
+        },
+        {
+          "tensor": "dst_points"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "affine_matrix"
+        }
+      ]
+    },
+    {
+      "type": "XR_SECURE_MR_OPERATOR_TYPE_GET_AFFINE_PICO",
+      "inputs": [
+        {
+          "tensor": "dst_points"
+        },
+        {
+          "tensor": "camera_clip_points"
+        }
+      ],
+      "outputs": [
+        {
+          "tensor": "affine_reverse_matrix"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    "camera_clip_points"
+  ],
+  "outputs": [
+    "affine_matrix",
+    "affine_reverse_matrix"
+  ]
+}

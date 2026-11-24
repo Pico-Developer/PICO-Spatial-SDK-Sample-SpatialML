@@ -80,7 +80,7 @@ class SrAlgorithmImpl(
                         )
                     )!!
             if (useSecureMr) {
-                displaySceneGraph = session.newSceneFromGLTFSuspend("Display512.glb")
+                displaySceneGraph = session.newSceneFromGLTFSuspend("SpatialML/Display512.glb")
                 Log.i("SpatialML", "binocular scenegraph loaded")
             }
             dynamicTexture =
@@ -100,7 +100,7 @@ class SrAlgorithmImpl(
         }
 
     /**
-     * The initialize the scene rendered in the SecureMR container, so only non-null for SecureMR
+     * The initialize the scene rendered in the SpatialML container, so only non-null for SpatialML
      * mode. Always null in RelaxMR mode.
      */
     val initTask =
@@ -159,28 +159,29 @@ class SrAlgorithmImpl(
                     newLocalTensor(
                         MultiDimensionalInitInfo(
                             DataType.Image.RGB_FLOAT,
-                            intArrayOf(AFFINE_IMG_SIZE, AFFINE_IMG_SIZE)
+                            intArrayOf(AFFINE_IMG_SIZE, AFFINE_IMG_SIZE),
                         )
                     )
                 copy(affinedUint8, affinedFloat)
-                arithmetic(affinedFloat) {
-                    affinedFloat / 255.0
-                }
+                arithmetic(affinedFloat) { affinedFloat / 255.0 }
                 val zoomedResult =
                     newLocalTensor(
                         MultiDimensionalInitInfo(
                             DataType.Image.RGB_FLOAT,
-                            intArrayOf(ZOOMED_IMG_SIZE, ZOOMED_IMG_SIZE)
+                            intArrayOf(ZOOMED_IMG_SIZE, ZOOMED_IMG_SIZE),
                         )
                     )
                 val zoomedResultUnit =
                     newLocalTensor(
                         MultiDimensionalInitInfo(
                             DataType.Image.R8G8B8_U,
-                            intArrayOf(ZOOMED_IMG_SIZE, ZOOMED_IMG_SIZE)
+                            intArrayOf(ZOOMED_IMG_SIZE, ZOOMED_IMG_SIZE),
                         )
                     )
-                loadAssetToSharedMemory(appContext, "real_esrgan_x4v3.tflite") {
+                loadAssetToSharedMemory(
+                    appContext,
+                    "SpatialML/superresolution-pipeline/model/real_esrgan_x4v3.tflite",
+                ) {
                     Log.i("SpatialML", "Real ESRGAN x4v3 being deployed")
                     runModelInference(
                         modelName = "real_esrgan_x4v3",
@@ -191,9 +192,7 @@ class SrAlgorithmImpl(
                             arrayOf(Pipeline.ModelNodeEncoding("upscaled_image", zoomedResult)),
                     )
                 }
-                arithmetic(zoomedResult) {
-                    zoomedResult * 255.0
-                }
+                arithmetic(zoomedResult) { zoomedResult * 255.0 }
                 copy(zoomedResult, zoomedResultUnit)
                 convertColor(Pipeline.ColorConversion.RGB_TO_RGBA, zoomedResultUnit, dynamicTexture)
                 Log.i("SpatialML", "the super-resolution (main) pipeline has been created")
@@ -272,8 +271,8 @@ class SrAlgorithmImpl(
             Log.i(
                 "SpatialML",
                 "zoomPoints reset to [$beginAfterZoom, $beginAfterZoom], " +
-                        "[$endAfterZoom, $beginAfterZoom], [$beginAfterZoom, $endAfterZoom] " +
-                        "as zoom factor is $zoomFactor (upscale ratio = $upscaleRatio)",
+                    "[$endAfterZoom, $beginAfterZoom], [$beginAfterZoom, $endAfterZoom] " +
+                    "as zoom factor is $zoomFactor (upscale ratio = $upscaleRatio)",
             )
         }
 

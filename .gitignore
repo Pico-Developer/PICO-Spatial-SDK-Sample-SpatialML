@@ -12,6 +12,7 @@ captures/
 # Local config
 local.properties
 google-services.json
+.pico-env.json
 
 # Keystore
 *.jks
@@ -25,5 +26,16 @@ google-services.json
 *.log
 .DS_Store
 
+# Python tooling caches
+__pycache__/
+*.py[cod]
+
+# Kotlin compiler session caches
+.kotlin/
+
 # Spotless
 .spotless/
+
+# Agent verification output
+.scratch/
+artifacts/

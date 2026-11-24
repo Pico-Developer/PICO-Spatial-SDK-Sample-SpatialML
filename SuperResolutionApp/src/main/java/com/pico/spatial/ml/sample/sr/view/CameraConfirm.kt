@@ -15,7 +15,6 @@
  */
 package com.pico.spatial.ml.sample.sr.view
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,9 +48,7 @@ import com.pico.spatial.ui.foundation.material.backgroundMaterial
 fun CameraConfirm(srViewModel: SrViewModel = viewModel()) {
 
     Sheet(
-        modifier = Modifier
-            .backgroundMaterial(true)
-            .background(Color.LightGray),
+        modifier = Modifier.backgroundMaterial(true),
         title = {
             Text(
                 "RelaxMR mode",
@@ -77,10 +74,7 @@ fun CameraConfirm(srViewModel: SrViewModel = viewModel()) {
                 Button(
                     onClick = { srViewModel.updateAppMode(SrViewModel.AppMode.RELAX_MR_CONFIRMED) },
                     modifier = Modifier.padding(12.dp),
-                    colors = buttonColors(
-                        containerColor = Color.Black,
-                        contentColor = Color.White,
-                    )
+                    colors = buttonColors(containerColor = Color.Black, contentColor = Color.White),
                 ) {
                     Text("Confirm", color = Color.White)
                 }
@@ -90,8 +84,8 @@ fun CameraConfirm(srViewModel: SrViewModel = viewModel()) {
     ) {
         Text(
             "In RelaxMR mode, app will request the zoomed camera image from SpatialML" +
-                    " framework. The app will only proceed if you grant the permission to access" +
-                    " the camera data.",
+                " framework. The app will only proceed if you grant the permission to access" +
+                " the camera data.",
             textAlign = TextAlign.Justify,
             fontSize = 3.em,
             softWrap = true,

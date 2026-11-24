@@ -1,0 +1,14 @@
+Lion dance head — original sample artwork
+
+Authored for this repository in Blender 4.5.9 LTS and distributed as the
+ready-to-load lion-dance.glb asset. Geometry, materials and the embedded weave
+normal texture were created for this sample. No external model, image or
+downloaded texture is incorporated.
+
+Copyright 2026 PICO. Artwork is licensed under Creative Commons Attribution 4.0 International,
+consistent with this repository's asset policy:
+https://creativecommons.org/licenses/by/4.0/
+
+The model depicts a Southern Chinese lion dance costume head, with lacquered
+ornament, fur trim, a forehead mirror and independently articulated jaw/eyes.
+asset.json records axes, dimensions, rig pivots and the exported GLB hash.

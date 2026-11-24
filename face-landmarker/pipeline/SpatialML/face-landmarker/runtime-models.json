@@ -1,0 +1,121 @@
+{
+  "face_pose_pack.tflite": {
+    "sha256": "a5623d0b4cb7b1a8ad4b41359a5bdcfa5198d8d3f675da758c322e06cfa97fc6",
+    "referenceSha256": "d1ccc5dadbcc1906af88343d119661a81606ba79e6a711f0e07d46d98d4f0de7",
+    "portRenames": [
+      [
+        "diagnostics",
+        "tracking_metadata"
+      ]
+    ]
+  },
+  "face_landmark_pose_fit.tflite": {
+    "sha256": "3bc57d7e3d848d75594950571bcf885fbded1db6c5f19e9e86f137f5c2a50b41",
+    "referenceSha256": "c745f37deeca72db8d4863d956bc6440bc85432ae2bc7bea9ddceecf711242eb",
+    "portRenames": [
+      [
+        "producer_snapshot",
+        "capture_metadata"
+      ],
+      [
+        "diagnostics",
+        "tracking_metadata"
+      ],
+      [
+        "diagnostics",
+        "tracking_metadata"
+      ]
+    ]
+  },
+  "face_pose_mesh_pack.tflite": {
+    "sha256": "bd3037b64df998070d867ccd35fe164040f8d56fa84d9ef988d80e7458472c0a",
+    "referenceSha256": "6fd9eb80e66e48abf22134d879bd76f241c30286d071b31da32c2e4c3397bc1f",
+    "portRenames": [
+      [
+        "diagnostics",
+        "tracking_metadata"
+      ]
+    ]
+  },
+  "face_completion_marker.tflite": {
+    "sha256": "3cc92c8958073dc9621ceff923b4ccb322b1ba704a642f361dd9d7c77e5d8ceb",
+    "referenceSha256": "3cc92c8958073dc9621ceff923b4ccb322b1ba704a642f361dd9d7c77e5d8ceb",
+    "portRenames": []
+  },
+  "face_detector_image_preprocessing.tflite": {
+    "sha256": "356780b9290fb8a1b4836a564e96028ede08085d8feffec84f5517db1f90dd88",
+    "referenceSha256": "356780b9290fb8a1b4836a564e96028ede08085d8feffec84f5517db1f90dd88",
+    "portRenames": []
+  },
+  "face_detection_roi_update.tflite": {
+    "sha256": "908b361b726a660399a0462b7e954749d1d8fffe1ec575ef3be87b5a2c2cfd76",
+    "referenceSha256": "e4f3782b1a12c6715ffb70d7438ec23c5cb5bbb1db47cfffafb8ea984dc613ed",
+    "portRenames": [
+      [
+        "trial_intrinsics",
+        "calibrated_intrinsics"
+      ],
+      [
+        "lab_mode",
+        "camera_profile"
+      ],
+      [
+        "producer_snapshot",
+        "capture_metadata"
+      ]
+    ]
+  },
+  "face_landmark_estimation.tflite": {
+    "sha256": "1daa04f631a8592b92cca082240645b8c1cb0b0c1ff7ee9b031fa4fb8842dbc2",
+    "referenceSha256": "1daa04f631a8592b92cca082240645b8c1cb0b0c1ff7ee9b031fa4fb8842dbc2",
+    "portRenames": []
+  },
+  "face_tracking_roi_update.tflite": {
+    "sha256": "247f217e760bd0756b4c951a109ccc6fe04d644ea88ae7752cb4e1891274a544",
+    "referenceSha256": "2edbad6e2edb4382f18fae8e037c1ec917b265eeb6f4003eb41e31d2d902251a",
+    "portRenames": [
+      [
+        "trial_intrinsics",
+        "calibrated_intrinsics"
+      ],
+      [
+        "lab_mode",
+        "camera_profile"
+      ],
+      [
+        "producer_snapshot",
+        "capture_metadata"
+      ]
+    ]
+  },
+  "face_landmark_image_preprocessing.tflite": {
+    "sha256": "051c024a3b751685493e2991b161c1a35288bbe2bcc111cb3d429bb2cf132a2a",
+    "referenceSha256": "051c024a3b751685493e2991b161c1a35288bbe2bcc111cb3d429bb2cf132a2a",
+    "portRenames": []
+  },
+  "face_detector.tflite": {
+    "sha256": "328ce1601afbed980a70a30e0fb8eb3982469f05e0191977cdd59917c5e109bd",
+    "referenceSha256": "328ce1601afbed980a70a30e0fb8eb3982469f05e0191977cdd59917c5e109bd",
+    "portRenames": []
+  },
+  "face_blendshape_input_preparation.tflite": {
+    "sha256": "9d67a319e38f5be1b40dcb480955e6ef8e8ce85938d08992325c56ee0138162c",
+    "referenceSha256": "9d67a319e38f5be1b40dcb480955e6ef8e8ce85938d08992325c56ee0138162c",
+    "portRenames": []
+  },
+  "face_blendshapes.tflite": {
+    "sha256": "4f36dded049db18d76048567439b2a7f58f1daabc00d78bfe8f3ad396a2d2082",
+    "referenceSha256": "4f36dded049db18d76048567439b2a7f58f1daabc00d78bfe8f3ad396a2d2082",
+    "portRenames": []
+  },
+  "face_pose_mesh_blendshapes_pack.tflite": {
+    "sha256": "66ee102f11b88a61012e47e5c3568f035d92e9be87b578d766478831670298b4",
+    "referenceSha256": "98ac88e88c0ba2073022af68dcabc3388e980151179d6d7b1f291429acabb947",
+    "portRenames": [
+      [
+        "diagnostics",
+        "tracking_metadata"
+      ]
+    ]
+  }
+}

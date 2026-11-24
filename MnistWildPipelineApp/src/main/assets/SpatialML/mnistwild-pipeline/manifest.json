@@ -1,0 +1,16 @@
+{
+  "schema_version": "2",
+  "id": "mnistwild-pipeline",
+  "pipelines": [
+    {
+      "id": "inference",
+      "path": "pipeline/inference.json"
+    }
+  ],
+  "runtime": {
+    "supported_modes": [
+      "spatial"
+    ],
+    "detection_tensor": "predicted_score"
+  }
+}
